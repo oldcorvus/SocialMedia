@@ -1,0 +1,21 @@
+{% extends 'account/base.html' %} {% load static %} {% block content %}
+
+<!-- Sign Up Section Begin -->
+<div class="row">
+  {% include "messages.html" %}
+  <div class="container">
+    <div class="signup-title">
+      <h2>ثبت نام</h2>
+      <p>فرم زیر را حهت ثبت نام در سایت تکمیل کنید</p>
+    </div>
+    <form action="#" class="signup-form" method="POST">
+      <div class="sf-input-list">
+        <div class="input-list">{% csrf_token %} {{form.as_p}}</div>
+      </div>
+
+      <button type="submit"><span>ثبت نام</span></button>
+    </form>
+  </div>
+</div>
+<!-- Sign Up Section End -->
+{% endblock content %}

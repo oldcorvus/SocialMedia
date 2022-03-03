@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ user}}{% endblock %}
+{% block content %}
+
+<div class="container mt-5 mb-5 d-flex justify-content-center">
+  <div class="card p-3">
+    <div class="d-flex align-items-center">
+
+      <div class="image">
+        <img src="{% thumbnail user.profile_image 500x500 %}" class="user-detail">
+      </div>
+      <div class="ml-3 w-100">
+        <h4 class="mb-0 mt-0">{{user}}</h4> <span>{{user.about_me}}</span>
+        <div class="p-2 mt-2 bg-danger d-flex justify-content-between rounded text-white stats">
+          <div class="d-flex flex-column"> <span class="articles">Articles</span> <span
+              class="number1">{{total_articles}}</span> </div>
+          <div class="d-flex flex-column"> <span class="articles">Bookmarks</span> <span
+              class="number1">{{total_images}}</span> </div>
+          <div class="d-flex flex-column"> Followers <span class="count">
+              <span class="total">{{ total_followers }}</span>
+
+            </span></div>
+          <div class="d-flex flex-column"> <span class="rating">Following</span> <span
+              class="number3">{{total_following}}</span> </div>
+        </div>
+        <div class="button mt-2 d-flex flex-row align-items-center">
+          {% if self_profile %}
+
+          <p>دکمه رو به رو را بر روی نوار ابزار بالای مرورگر خود بکشید(درگ اند دراپ) تا بتوانید تصاویر از سایت های دیگر
+            را بوکمارک کنید و به اشتراک بگذارید → <a href="javascript:{% include 'bookmarklet_launcher.js' %}"
+              class="button">Bookmark it</a></p>
+          <button class="btn btn-sm btn-outline-danger w-100"><a href="" class="text-muted"> اضافه کردن مقاله</a>
+          </button>
+          <button class="btn btn-sm btn-outline-danger w-100"> <a href="" class="text-muted">نمایش همه مقاله ها</a>
+          </button>
+
+          <button class="btn btn-sm btn-outline-danger w-100"> <a
+              href="{% url 'account:profile_edit' request.user.pk %}" class="text-muted">ویرایش اطلاعات شخصی</a>
+          </button>
+          {% else %}
+          <button class="btn btn-sm btn-outline-danger w-100"> <a href="#" data-id="{{ user.id }}"
+              data-action="{% if request.user in user.followers.all %}un{% endif %}follow"
+              class="follow button text-muted">
+              {% if request.user not in user.followers.all %}
+              Follow
+              {% else %}
+              Unfollow
+              {% endif %}
+            </a>
+          </button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

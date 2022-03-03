@@ -1,0 +1,56 @@
+   
+   {% load static %}
+   
+   <!DOCTYPE html>
+   <html lang="fa" dir="rtl">
+   
+   <head>
+   
+       <meta charset="UTF-8">
+       <meta name="description" content="Amin Template">
+       <meta name="keywords" content="Amin, unica, creative, html">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+       <title>Moel</title>
+   
+       <!-- Google Font -->
+       <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap"
+           rel="stylesheet">
+       <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900&display=swap" rel="stylesheet">
+   
+       <!-- Css Styles -->
+       <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/barfiller.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+       <link rel="stylesheet" href="{% static 'css/rtl.css' %}" type="text/css">
+
+   </head>
+   
+   <body>
+       <!-- Page Preloder -->
+       <div id="preloder">
+           <div class="loader"></div>
+       </div><!-- Js Plugins -->
+     
+        <div class="signup-text" style="background-color: black;">
+       {% block content  %}
+         
+       {% endblock content  %}
+       </div>
+    
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/circle-progress.min.js' %}"></script>
+    <script src="{% static 'js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

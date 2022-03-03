@@ -1,0 +1,48 @@
+body {
+    text-align: right;
+    
+}
+
+div[style*="background:#eeeeee; border:1px solid #cccccc; padding:5px 10px"] {
+
+  background: #680606 !important;
+  padding: 26px 25px 24px 30px !important;
+  position: relative !important;
+  z-index: 1 !important;
+  margin-bottom: 30px !important;
+}
+
+.leftText {
+    text-align: left !important;
+}
+details-text .dt-quote p, .contact-form .dt-quote p {
+  text-align: right !important;
+}
+.rightText {
+  text-align: right !important;
+}
+.Tcolor {
+  background-color: black !important;
+  color: white !important;
+
+
+}
+.cRed {
+  background-color: brown;
+}
+.dropdown-menu li {
+    position: relative;
+  }
+  .dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+  }
+  .dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+  }
+  .dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+  }

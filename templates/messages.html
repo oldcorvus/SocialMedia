@@ -1,0 +1,15 @@
+{% load static %}
+
+{% if messages  %}
+<div class="col-lg-12 p-0">
+   <div class="details-text gallery-page">
+<div class="dt-quote">
+
+{% for message in messages %}
+<p class="rightText"> <span>   {{message.tags}}   :  </span>{{message}}</p>
+
+{% endfor %}
+</div>
+</div>
+</div>
+{% endif %}

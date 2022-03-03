@@ -1,0 +1,27 @@
+ {% extends 'account/base.html' %}
+ {% load static %}
+ {% block content %}
+   
+
+ <!-- Sign Up Section Begin -->
+ <div class="row">
+        {% include "messages.html" %}
+    
+        <div class="container">
+            <div class="signup-title">
+                <h2>ورود</h2>
+                <p>برای ورود به حساب خود فرم زیر را تکمیل کنید</p>
+            </div>
+            <form action="#" class="signup-form" method="POST">
+                <div class="sf-input-list">
+                    {% csrf_token %}
+                   {{form.as_p}}
+                </div>
+
+                <button type="submit"><span>ورود/span></button>
+            </form>
+            </div>
+        </div>
+
+<!-- Sign Up Section End -->
+{% endblock content %}
