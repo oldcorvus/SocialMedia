@@ -1,0 +1,16 @@
+<ul class="dropdown">
+    {% for cat in cat.children.active %}
+   
+    {% if cat.children.active %}
+    <li><a href="{{ cat.get_absolute_url }}">{{cat.title}}<i class="fa fa-angle-down"></i></a>
+
+    {% include 'blog/partials/category_loop.html' %}
+    {% else %}
+    <li><a href="{{ cat.get_absolute_url }}">{{cat.title}}</a>
+
+</li>
+{% endif %}
+
+    {% endfor %}
+  </ul>
+  

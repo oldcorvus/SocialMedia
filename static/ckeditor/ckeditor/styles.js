@@ -14,12 +14,7 @@
 // website requirements and design properly.
 //
 // For more information refer to: https://ckeditor.com/docs/ckeditor4/latest/guide/dev_styles.html#style-rules
-CKEDITOR.stylesSet.add( 'my_styles',
-[
-    // Inline styles
-    { name : 'Special Container', element : 'div', attributes : { 'class' : 'dt-quote' } },
 
-]);
 CKEDITOR.stylesSet.add( 'default', [
 	/* Block styles */
 
@@ -43,17 +38,12 @@ CKEDITOR.stylesSet.add( 'default', [
 	{
 		name: 'Special Container',
 		element: 'div',
-        attributes: {
-            class: 'dt-quote'
-        }
+		styles: {
+			padding: '5px 10px',
+			background: '#eee',
+			border: '1px solid #ccc'
+		}
 	},
-	{
-        name: 'Image caption', //THESE NEXT 4 LINES I CHANGED 
-        element: 'div',
-        attributes: {
-            class: 'dt-quote'
-        }
-    },
 
 	/* Inline styles */
 

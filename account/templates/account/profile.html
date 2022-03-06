@@ -5,6 +5,7 @@
 {% block title %}{{ user}}{% endblock %}
 {% block content %}
 
+
 <div class="container mt-5 mb-5 d-flex justify-content-center">
   <div class="card p-3">
     <div class="d-flex align-items-center">
@@ -16,15 +17,15 @@
         <h4 class="mb-0 mt-0">{{user}}</h4> <span>{{user.about_me}}</span>
         <div class="p-2 mt-2 bg-danger d-flex justify-content-between rounded text-white stats">
           <div class="d-flex flex-column"> <span class="articles">Articles</span> <span
-              class="number1">{{total_articles}}</span> </div>
+              class="number1">{{user.articles.count}}</span> </div>
           <div class="d-flex flex-column"> <span class="articles">Bookmarks</span> <span
               class="number1">{{total_images}}</span> </div>
           <div class="d-flex flex-column"> Followers <span class="count">
-              <span class="total">{{ total_followers }}</span>
+              <span class="total">{{ user.followers.count }}</span>
 
             </span></div>
           <div class="d-flex flex-column"> <span class="rating">Following</span> <span
-              class="number3">{{total_following}}</span> </div>
+              class="number3">{{user.following.count}}</span> </div>
         </div>
         <div class="button mt-2 d-flex flex-row align-items-center">
           {% if self_profile %}
@@ -32,9 +33,11 @@
           <p>دکمه رو به رو را بر روی نوار ابزار بالای مرورگر خود بکشید(درگ اند دراپ) تا بتوانید تصاویر از سایت های دیگر
             را بوکمارک کنید و به اشتراک بگذارید → <a href="javascript:{% include 'bookmarklet_launcher.js' %}"
               class="button">Bookmark it</a></p>
-          <button class="btn btn-sm btn-outline-danger w-100"><a href="" class="text-muted"> اضافه کردن مقاله</a>
+          <button class="btn btn-sm btn-outline-danger w-100"><a href="{% url 'blog:add-article' %}" class="text-muted">
+              اضافه کردن مقاله</a>
           </button>
-          <button class="btn btn-sm btn-outline-danger w-100"> <a href="" class="text-muted">نمایش همه مقاله ها</a>
+          <button class="btn btn-sm btn-outline-danger w-100"> <a
+              href="{% url 'blog:user-articles' request.user.username %}" class="text-muted">نمایش همه مقاله ها</a>
           </button>
 
           <button class="btn btn-sm btn-outline-danger w-100"> <a
@@ -59,3 +62,35 @@
 </div>
 
 {% endblock content %}
+{% block domready %}
+$('a.follow').click(function(e){
+e.preventDefault();
+
+$.post('{% url "relations:user_follow" %}',
+{
+id: $(this).data('id'),
+action: $(this).data('action')
+},
+
+function(data){
+
+if (data['status'] == 'ok') {
+var previous_action = $('a.follow').data('action');
+
+// toggle data-action
+$('a.follow').data('action',
+previous_action == 'follow' ? 'unfollow' : 'follow');
+// toggle link text
+$('a.follow').text(
+previous_action == 'follow' ? 'Unfollow' : 'Follow');
+
+// update total followers
+var previous_followers = parseInt(
+$('span.count .total').text());
+$('span.count .total').text(previous_action == 'follow' ?
+previous_followers + 1 : previous_followers - 1);
+}
+}
+);
+});
+{% endblock %}

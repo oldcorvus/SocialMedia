@@ -1,0 +1,121 @@
+{% load static %}
+{% load main_site %}
+<!-- Page Preloder -->
+<div id="preloder">
+  <div class="loader"></div>
+</div>
+
+<!-- Humberger Menu Begin -->
+<div class="humberger-menu-overlay"></div>
+<div class="humberger-menu-wrapper">
+  <div class="hw-logo">
+    <a href="#"><img src="img/f-logo.png" alt="" /></a>
+  </div>
+  <div class="hw-menu mobile-menu">
+    <ul>
+      <li><a href="{% url 'blog:index' %}">خانه</a></li>
+      <li>
+        <a href="#">دسته بندی ها <i class="fa fa-angle-down"></i></a>
+      {% include 'blog/partials/category_nav_side_menu.html' %}
+      </li>
+    </ul>
+  </div>
+  <div id="mobile-menu-wrap"></div>
+  <div class="hw-copyright">
+    Copyright © 2019 Colorlib Inc. All rights reserved
+  </div>
+  <div class="hw-social">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-youtube-play"></i></a>
+    <a href="#"><i class="fa fa-instagram"></i></a>
+  </div>
+
+</div>
+<!-- Humberger Menu End -->
+
+<!-- Header Section Begin -->
+<header class="header-section">
+  <div class="ht-options">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-8">
+          <div class="ht-widget">
+            <ul>
+              <li>
+                <i class="fa fa-sun-o"></i>
+                <span></span> {{request.user}}
+              </li>
+              <li class="signup-switch signup-open">
+                <i class="fa fa-sign-out"></i>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'account:user_profile' request.user.username %}" style="color: white">Profile /
+                </a>
+                <a href="{% url 'account:user_logout' %}" style="color: white">Logout
+                </a>
+                {% else %}
+                <a href="{% url 'account:user_login' %}" style="color: white">Login /
+                </a>
+                <a href="{% url 'account:user_register' %}" style="color: white">Sign up</a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-4">
+          <div class="ht-social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-youtube-play"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-envelope-o"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <a href="./index.html"><img src="img/logo.png" alt="" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-options">
+    <div class="container">
+      <div class="humberger-menu humberger-open">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="nav-search search-switch">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="nav-menu">
+        <ul>
+          <li class="active">
+            <a href="{% url 'blog:index' %}"><span>خانه</span></a>
+          </li>
+          <li class="mega-menu">
+            <a href="#"><span>دسته بندی ها <i class="fa fa-angle-down"></i></span></a>
+            <div class="megamenu-wrapper">{% include 'blog/partials/category_nav.html' %}</div>
+          </li>
+
+          {% if request.user.is_authenticated %}
+          <li>
+            <a href="#"><span>داشبورد <i class="fa fa-angle-down"></i></span></a>
+            <ul class="dropdown">
+              <li><a href="{% url 'blog:add-article' %}">اضافه کردن پست </a></li>
+              <li><a href="{% url 'blog:user-articles' request.user.username %}">همه پست های من </a></li>
+            </ul>
+          </li>
+          {% endif %}
+          <li>
+            <a href="#"><span>درباره من <i class="fa fa-angle-down"></i></span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Header End -->

@@ -1,0 +1,19 @@
+                <div class="pagination-item">
+                    {% if articles.number|add:'-4' > 1 %}
+                    <a href="?page={{ page_obj.number|add:'-5' }}"><span>Previous</span< /a>
+                            {% endif %}
+
+                            {% for i in page_obj.paginator.page_range %}
+                            {% if articles.number == i %}
+                            <a href="#"><span>{{ i }}</span> </a>
+
+
+                            {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %} <a
+                                href="?page={{ i }}"><span>{{ i }}</span></a>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                    <a href="?page={{ page_obj.number|add:'5' }}"><span>Next</span></a>
+                    {% endif %}
+
+                </div>

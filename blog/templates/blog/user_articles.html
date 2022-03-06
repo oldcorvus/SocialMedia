@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% load user_actions %}
+{% load main_site %}
+{% block content %}
+<!-- Categories list Section Begin -->
+<section class="categories-list-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 p-0">
+                {% for article in articles %}
+                <div class="cl-item">
+                    <div class="cl-pic">
+                        <img src="{{article.cover|thumbnail_url:'preview'}}" alt="">
+                    </div>
+                    <div class="cl-text">
+                        {% if request.user == article.author %}
+                        <div class="label"><a href="{% url 'blog:article-edit'  article.id %}"><span>Edit</span></a>
+                        </div>
+                        <div class="label" data-toggle="modal" data-target="#exampleModal"><span>Delete</span></div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-right">
+                                        <h5 class="  modal-title " id="exampleModalLabel">حذف مقاله</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-right">
+                                        ایا از حذف این مقاله اطمینان دارید؟
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">بستن</button>
+                                            <form action="{% url 'blog:article-delete' article.pk %}" method="post">
+                                                {% csrf_token %}
+                                  
+                                                <input type="submit" value="حذف"  name="cancel" />
+                                              </form>   </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <h5><a href="{{article.get_absolute_url}}">{{article.title}}</a></h5>
+                        <ul>
+                            <li>by <span>{{article.author}}</span></li>
+                            <li><i class="fa fa-clock-o"></i> {{article.publish}}</li>
+                            <li><i class="fa fa-comment-o"></i> 20</li>
+                        </ul>
+                        <p>{{article.content|safe|truncatewords:30}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% include 'blog/partials/pagination.html' %}
+            </div>
+            {% recent_posts %}
+
+        </div>
+    </div>
+</section>
+<!-- Categories List Section End -->
+{% endblock content %}

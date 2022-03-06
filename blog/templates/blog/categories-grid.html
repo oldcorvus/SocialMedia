@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+{% load jalali_tags %}
+{% load user_actions %}
+{% load main_site %}
+
+{% load thumbnail %}
+<!-- Categories Grid Section Begin -->
+<section class="categories-grid-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 p-0">
+        <div class="row">
+          {% for article in articles %}
+          <div class="col-lg-6">
+            <div class="cg-item">
+              <div class="cg-pic set-bg" >
+              <img src="{{article.cover|thumbnail_url:'preview'}}">
+                <div class="label"><span>{{category.title|truncatewords:5}}</span></div>
+              </div>
+              <div class="cg-text">
+                <h5>
+                  <a href="{{article.get_absolute_url}}">{{article.title}}</a
+                  >
+                </h5>
+                <ul>
+                  <li>by <span>{{article.author}}</span></li>
+                  <li><i class="fa fa-clock-o"></i> {{article.publish|to_jalali:'%y/%m/%d _ %H:%M:%S' }}</li>
+                  <li><i class="fa fa-comment-o"></i> </li>
+                </ul>
+                <p>
+
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+{% include 'blog/partials/pagination.html' %}
+      </div>
+      {% recent_posts %}
+
+    </div>
+  </div>
+</section>
+<!-- Categories Grid Section End -->
+{% endblock content %}

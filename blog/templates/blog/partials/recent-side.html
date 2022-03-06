@@ -1,0 +1,45 @@
+{% load thumbnail %}
+{% load jalali_tags %}
+
+<div class="col-lg-4 col-md-7 p-0">
+    <div class="sidebar-option">
+
+      <div class="hardware-guides">
+        <div class="section-title">
+          <h5>Recent Articles</h5>
+        </div>
+        {% for article in recent_articles %}
+        <div class="trending-item">
+          <div class="ti-pic">
+            <img src="{{article.cover|thumbnail_url:'user-preview'}}" alt="" />
+          </div>
+          <div class="ti-text">
+            <h6>
+                <a href="{{article.get_absolute_url}}">{{article.title}}</a
+
+            </h>
+            <ul>
+                <li>by <span>{{article.author}}</span></li>
+                <li><i class="fa fa-clock-o"></i> {{article.publish|to_jalali:'%y/%m/%d _ %H:%M:%S' }}</li>
+                <li><i class="fa fa-comment-o"></i> </li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+
+
+      </div>
+      <div class="insta-media">
+        <div class="section-title">
+          <h5>Recent Bookmarks</h5>
+        </div>
+        <div class="insta-pic">
+          <img src="img/instagram/ip-1.jpg" alt="" />
+          <img src="img/instagram/ip-2.jpg" alt="" />
+          <img src="img/instagram/ip-3.jpg" alt="" />
+          <img src="img/instagram/ip-4.jpg" alt="" />
+        </div>
+      </div>
+
+    </div>
+  </div>

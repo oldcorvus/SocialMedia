@@ -4,9 +4,12 @@ from django.utils import timezone
 from django_jalali.db import models as jmodels
 from .managers import UserManager
 from .utils import get_random_str
+from relations.models import Contact
+
 
 def upload_location(instance, filename):
     return f"user_profiles/{instance.username.lower()}/{get_random_str(10, 50)}.jpg"
+
 
 class CustomUser(AbstractUser):
     username = models.CharField(max_length=50, unique=True, db_index=True,
@@ -25,6 +28,9 @@ class CustomUser(AbstractUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
+    following = models.ManyToManyField('self', through=Contact,
+                                       related_name='followers',
+                                       symmetrical=False)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'

@@ -1,0 +1,30 @@
+{% for cat in category %}
+{% if cat.parent == None %}
+     <ul class="mw-nav">
+          <li><a href="{{ cat.get_absolute_url }}" >{{cat.title}}</a> 
+
+          </li>
+
+      </ul>
+    
+    
+<div class="mw-post">
+     {% for child in cat.children.active %}
+    <div class="mw-post-item" >
+        <div class="mw-pic">
+            <img src="{{child.cover.url}}" alt="">
+        </div>
+        <div class="mw-text">
+            <h6><a href="{{ child.get_absolute_url }}">{{child.title}}</a></h6>
+            <ul>
+                <li><i class="fa fa-clock-o"></i> Aug 01, 2019</li>
+                <li><i class="fa fa-comment-o"></i> 12</li>
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+
+    </div>
+
+    {% endif %}
+    {% endfor %}

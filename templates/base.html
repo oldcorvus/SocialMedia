@@ -66,6 +66,7 @@
   </head>
 
   <body>
+    {% include 'blog/partials/nav.html' %}
     {% include "messages.html" %} {% block content %} {% endblock content %}
 
     <!-- Footer Section Begin -->
@@ -92,21 +93,18 @@
           <div class="col-lg-4 col-md-6">
             <div class="editor-choice">
               <div class="section-title">
-                <h5>برگزیده ها</h5>
+                <h5> Moel</h5>
               </div>
               <div class="ec-item">
-                <div class="ec-pic">
-                  <img src="img/trending/editor-1.jpg" alt="" />
-                </div>
+      
                 <div class="ec-text">
                   <h6>
-                    <a href="#"
-                      >simple django project</a
-                    >
+                   Contact
                   </h6>
                   <ul>
-                    <li><i class="fa fa-clock-o"></i> Aug 01, 2019</li>
-                    <li><i class="fa fa-comment-o"></i> 12</li>
+                    <li><i class="fa fa-clock-o"></i>  
+                      Telegram: @Moel_13</li>
+                    <li><i class="fa fa-comment-o"></i> Email: moelcrow@gmail.com</li>
                   </ul>
                 </div>
               </div>
@@ -119,8 +117,9 @@
                 <h5>دسته بندی ها</h5>
               </div>
               <div class="tag-list">
-                <a href="#"><span>برنامه نویسی</span></a>
-
+                {% for cat  in category %}
+                <a href="{{cat.get_absolute_url}}"><span>{{cat.title}}</span></a>
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -156,50 +155,12 @@
     </footer>
     <!-- Footer Section End -->
 
-    <!-- Sign Up Section Begin -->
-    <div class="signup-section">
-      <div class="signup-close"><i class="fa fa-close"></i></div>
-      <div class="signup-text">
-        <div class="container">
-          <div class="signup-title">
-            <h2>Sign up</h2>
-            <p>Fill out the form below to recieve a free and confidential</p>
-          </div>
-          <form action="#" class="signup-form">
-            <div class="sf-input-list">
-              <input type="text" class="input-value" placeholder="User Name*" />
-              <input type="text" class="input-value" placeholder="Password" />
-              <input
-                type="text"
-                class="input-value"
-                placeholder="Confirm Password"
-              />
-              <input
-                type="text"
-                class="input-value"
-                placeholder="Email Address"
-              />
-              <input type="text" class="input-value" placeholder="Full Name" />
-            </div>
-            <div class="radio-check">
-              <label for="rc-agree"
-                >I agree with the term & conditions
-                <input type="checkbox" id="rc-agree" />
-                <span class="checkbox"></span>
-              </label>
-            </div>
-            <button type="submit"><span>REGISTER NOW</span></button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Sign Up Section End -->
 
     <!-- Search model Begin -->
     <div class="search-model">
       <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form">
+        <form class="search-model-form" >
           <input type="text" id="search-input" placeholder="Search here....." />
         </form>
       </div>

@@ -2,16 +2,9 @@ body {
     text-align: right;
     
 }
-
 div[style*="background:#eeeeee; border:1px solid #cccccc; padding:5px 10px"] {
-
-  background: #680606 !important;
-  padding: 26px 25px 24px 30px !important;
-  position: relative !important;
-  z-index: 1 !important;
-  margin-bottom: 30px !important;
+  clear:both;
 }
-
 .leftText {
     text-align: left !important;
 }

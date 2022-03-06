@@ -1,0 +1,287 @@
+{% load main_site %}
+{% load thumbnail %}
+<!-- Update News Section Begin -->
+<section class="update-news-section">
+  <div class="container">
+    <div class="row">
+      {% if user_articles %}
+      <div class="col-lg-8">
+        <div class="section-title">
+
+          <h5><span>Your Followings Recent Articles</span></h5>
+
+        </div>
+        <div class="tab-elem">
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="tabs-1" role="tabpanel">
+              <div class="row">
+                <div class="un-slider owl-carousel owl-loaded owl-drag">
+                  <div class="owl-stage-outer">
+                    <div class="owl-stage" style="
+                      transform: translate3d(-2160px, 0px, 0px);
+                      transition: all 1.2s ease 0s;
+                      width: 4320px;
+                    ">
+
+                      <div class="owl-item active" style="width: 720px">
+
+
+                        <div class="col-lg-12">
+                          {% if user_articles.0.target %}
+                          <div class="un-big-item set-bg" data-setbg="{{user_articles.0.target.cover.url}}"
+                            style="background-image: url('img/news/news-1.jpg')">
+                            <div class="ub-text">
+                              <div class="label"><span>Article</span></div>
+                              <h5>
+                                <a
+                                  href="{{user_articles.0.target.get_absolute_url}}">{{user_articles.0.target.title|safe}}</a>
+                              </h5>
+                              <ul>
+                                <li>by <span>{{user_articles.0.target.author}}</span></li>
+                                <li>
+                                  <i class="fa fa-clock-o"></i> {{user_articles.0.target.publish|timesince}}
+                                </li>
+                                <li><i class="fa fa-comment-o"></i> {{user_articles.0.target.comments.count}}</li>
+                              </ul>
+                            </div>
+
+                          </div>
+                          {% endif %}
+                          <div class="row">
+                            {% if user_articles.1.target %}
+                            <div class="col-md-4">
+                              <div class="un-item">
+                                <div class="un_pic set-bg" data-setbg="{{user_articles.1.target.cover.url}}" style="
+                                  background-image: url('img/news/news-3.jpg');
+                                ">
+                                  <div class="label"><span>Article</span></div>
+                                </div>
+                                <div class="un_text">
+                                  <h6>
+                                    <a
+                                      href="{{user_articles.1.target.get_absolute_url}}">{{user_articles.1.target.title|safe}}</a>
+                                  </h6>
+                                  <ul>
+                                    <li>
+                                      <i class="fa fa-clock-o"></i> {{user_articles.1.target.publish|timesince}}
+                                    </li>
+                                    <li><i class="fa fa-comment-o"></i> {{user_articles.1.target.comments.count}}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            {% endif %}
+                            {% if user_articles.2.target %}
+                            <div class="col-md-4">
+                              <div class="un-item">
+                                <div class="un_pic set-bg" data-setbg="{{user_articles.2.target.cover.url}}" style="
+                                  background-image: url('img/news/news-3.jpg');
+                                ">
+                                  <div class="label"><span>Article</span></div>
+                                </div>
+                                <div class="un_text">
+                                  <h6>
+                                    <a
+                                      href="{{user_articles.2.target.get_absolute_url}}">{{user_articles.2.target.title|safe}}</a>
+                                  </h6>
+                                  <ul>
+                                    <li>
+                                      <i class="fa fa-clock-o"></i> {{user_articles.2.target.publish|timesince}}
+                                    </li>
+                                    <li><i class="fa fa-comment-o"></i> {{user_articles.2.target.comments.count}}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            {% endif %}
+                            {% if user_articles.3.target %}
+                            <div class="col-md-4">
+                              <div class="un-item">
+                                <div class="un_pic set-bg" data-setbg="{{user_articles.3.target.cover.url}}" style="
+                                  background-image: url('img/news/news-3.jpg');
+                                ">
+                                  <div class="label"><span>Reviews</span></div>
+                                </div>
+                                <div class="un_text">
+                                  <h6>
+                                    <a href="#">{{user_articles.3.target.title|safe}}</a>
+                                  </h6>
+                                  <ul>
+                                    <li>
+                                      <i class="fa fa-clock-o"></i> {{user_articles.3.target.publish|timesince}}
+                                    </li>
+                                    <li><i class="fa fa-comment-o"></i> {{user_articles.3.target.comments.count}}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            {% endif %}
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="owl-nav">
+                    <button type="button" role="presentation" class="owl-prev">
+                      <span class="arrow_carrot-left"></span></button><button type="button" role="presentation"
+                      class="owl-next">
+                      <span class="arrow_carrot-right"></span>
+                    </button>
+                  </div>
+                  <div class="owl-dots disabled"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      {% endif %}
+      {% followings_action_sidebar user %}
+    </div>
+  </div>
+</section>
+
+
+<!-- Update News Section End -->
+
+<section class="update-news-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="section-title">
+          {% if user_bookmarks %}
+          <h5><span>Your Followings Recent Bookmarks</span></h5>
+          {% else %}
+
+          <h5><span>Follow other users to see their Bookmarks</span></h5>
+
+          {% endif %}
+        </div>
+        <div class="tab-elem">
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="tabs-1" role="tabpanel">
+              <div class="row">
+                <div class="un-slider owl-carousel owl-loaded owl-drag">
+                  <div class="owl-stage-outer">
+                    <div class="owl-stage" style="
+                      transform: translate3d(-2160px, 0px, 0px);
+                      transition: all 1.2s ease 0s;
+                      width: 4320px;
+                    ">
+
+                      <div class="owl-item active" style="width: 720px">
+
+                        <div class="col-lg-12">
+                          {% if user_bookmarks.0.target %}
+                          <div class="un-big-item set-bg" data-setbg="{{user_bookmarks.0.target.image.url}}"
+                            style="background-image: url('img/news/news-1.jpg')">
+                            <div class="ub-text">
+                              <div class="label"><span>Reviews</span></div>
+                              <h5>
+                                <a href="#">{{user_bookmarks.0.target.title|safe}}</a>
+                              </h5>
+                              <ul>
+                                <li>by <span>{{user_bookmarks.0.target.user}}</span></li>
+                                <li>
+                                  <i class="fa fa-clock-o"></i> {{user_bookmarks.0.target.created|timesince}}
+                                </li>
+                                <li><i class="fa fa-comment-o"></i> {{user_bookmarks.0.target.comments.count}}</li>
+                              </ul>
+                            </div>
+
+                          </div>
+                          {% endif %}
+                          <div class="row">
+                            {% if user_bookmarks.1.target %}
+                            <div class="col-md-4">
+                              <div class="un-item">
+                                <div class="un_pic set-bg" data-setbg="{{user_bookmarks.1.target.image.url}}" style="
+                                  background-image: url('img/news/news-3.jpg');
+                                ">
+                                  <div class="label"><span>Reviews</span></div>
+                                </div>
+                                <div class="un_text">
+                                  <h6>
+                                    <a href="#">{{user_bookmarks.1.target.title|safe}}</a>
+                                  </h6>
+                                  <ul>
+                                    <li>
+                                      <i class="fa fa-clock-o"></i> {{user_bookmarks.1.target.created|timesince}}
+                                    </li>
+                                    <li><i class="fa fa-comment-o"></i> {{user_bookmarks.1.target.comments.count}}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            {% endif %}
+                            {% if user_bookmarks.2.target %}
+                            <div class="col-md-4">
+                              <div class="un-item">
+                                <div class="un_pic set-bg" data-setbg="{{user_bookmarks.2.target.image.url}}" style="
+                                  background-image: url('img/news/news-3.jpg');
+                                ">
+                                  <div class="label"><span>Reviews</span></div>
+                                </div>
+                                <div class="un_text">
+                                  <h6>
+                                    <a href="#">{{user_bookmarks.2.target.title|safe}}</a>
+                                  </h6>
+                                  <ul>
+                                    <li>
+                                      <i class="fa fa-clock-o"></i> {{user_bookmarks.2.target.created|timesince}}
+                                    </li>
+                                    <li><i class="fa fa-comment-o"></i> {{user_bookmarks.2.target.comments.count}}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            {% endif %}
+                            {% if user_bookmarks.3.target %}
+                            <div class="col-md-4">
+                              <div class="un-item">
+                                <div class="un_pic set-bg" data-setbg="{{user_bookmarks.3.target.image.url}}" style="
+                                  background-image: url('img/news/news-3.jpg');
+                                ">
+                                  <div class="label"><span>Reviews</span></div>
+                                </div>
+                                <div class="un_text">
+                                  <h6>
+                                    <a href="#">{{user_bookmarks.3.target.title|safe}}</a>
+                                  </h6>
+                                  <ul>
+                                    <li>
+                                      <i class="fa fa-clock-o"></i> {{user_bookmarks.3.target.created|timesince}}
+                                    </li>
+                                    <li><i class="fa fa-comment-o"></i> {{user_bookmarks.3.target.comments.count}}</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="owl-nav">
+                    <button type="button" role="presentation" class="owl-prev">
+                      <span class="arrow_carrot-left"></span></button><button type="button" role="presentation"
+                      class="owl-next">
+                      <span class="arrow_carrot-right"></span>
+                    </button>
+                  </div>
+                  <div class="owl-dots disabled"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

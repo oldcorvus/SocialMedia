@@ -1,0 +1,40 @@
+{% load thumbnail %}
+<div class="col-lg-4">
+  <div class="sidebar-option">
+
+    <div class="hardware-guides">
+      <div class="section-title">
+        <h5>activities </h5>
+      </div>
+      {% for action in actions %}
+      {% with user=action.user %}
+      <div class="trending-item">
+        <div class="ti-pic">
+          {% if user.profile_image %}
+
+          <a href="{{ user.get_absolute_url }}">
+            <img src="{{user.profile_image | thumbnail_url:'user-preview'}}" alt="{{ user}}" class="item-img">
+          </a>
+          {% endif %}
+        </div>
+        <div class="ti-text">
+          <h6 class="text-white"> <a href="{{ user.get_absolute_url }}">
+              {{user}}
+            </a>
+            {{ action.verb }}
+            {% if action.target %}
+            {% with target=action.target %}
+            <a href="{{ target.get_absolute_url }}">{{ target }}</a>
+            {% endwith %}
+            {% endif %}
+          </h6>
+          <ul>
+            <li><i class="fa fa-clock-o"></i> {{ action.created|timesince }} ago</li>
+          </ul>
+        </div>
+      </div>
+      {% endwith %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

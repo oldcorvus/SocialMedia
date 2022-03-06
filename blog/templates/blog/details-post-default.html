@@ -1,0 +1,199 @@
+{% extends "base.html" %} {% load static %}
+{% block content %}
+{% load main_site %}
+{% load user_actions %}
+
+{% with total_likes=article.users_like.count users_like=article.users_like.all %}
+{% load thumbnail %}
+
+<!-- Details Hero Section Begin -->
+<section class="details-hero-section set-bg" data-setbg="" style="background-color: black">
+  <img src="{{article.cover |thumbnail_url:'post'}}" alt="" style="
+      margin-left: 5%;
+      margin-right: auto;
+      margin-bottom: auto;
+      margin-top: auto;
+    " />
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="details-hero-text">
+          <div class="label"> <span class="count">
+              <span class="total">{{ total_likes }} </span>
+              like{{ total_likes|pluralize }}
+            </span></div>
+
+          <div class="label"><span>views : </span></div>
+          
+            {% if request.user == article.author %}
+            <div class="details-hero-text">
+              <div class="label"> <form action="{% url 'blog:article-delete' article.pk %}" method="post">
+              {% csrf_token %}
+          
+                <button type="submit"  style="color:white ;background:transparent">حذف</button>
+            </form>
+          </div>
+          <div class="label"><a href="{% url 'blog:article-edit' article.pk %}" style="color:white;  ">ویرایش </a></div>
+          </div>
+          {% endif %}
+
+          <h3>{{article.title}}</h3>
+          <ul>
+            <li>by <span>{{article.author}}</span></li>
+            <li><i class="fa fa-clock-o"></i> {{article.publish}}</li>
+            <li><i class="fa fa-comment-o"></i> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Details Hero Section End -->
+
+<!-- Details Post Section Begin -->
+<section class="details-post-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 p-0">
+        <div class="details-text">
+          <div class="dt-desc">{{article.content|safe}}</div>
+
+          <div class="dt-tags">
+            {% for cat in article.category.all %}
+            <a href="{{cat.get_absolute_url}}"><span>{{cat.title}}</span></a>
+            {% endfor %}
+          </div>
+          <div class="dt-share">
+            <div class="ds-title">Share</div>
+            <div class="ds-links">
+              <a href="#" data-id="{{ article.id }}" data-action="{% if request.user in users_like %}un{% endif %}like"
+                class="like button wide">
+                {% if request.user not in users_like %}
+                Like
+                {% else %}
+                Unlike
+                {% endif %}
+              </a>
+
+              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-google-plus"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-youtube-play"></i></a>
+            </div>
+          </div>
+
+          <div class="dt-author">
+            <div class="da-pic">
+              <img src="{{article.author.profile_image | thumbnail_url:'user'}}" alt="" />
+            </div>
+            <div class="da-text">
+              <h5>{{article.author}}</h5>
+              <p>{{article.author}}</p>
+              <div class="da-links">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="dt-comment">
+            {% with total=comments.count %}
+            <h4>{{ total }} comment{{ total|pluralize }}</h4>
+            {% endwith %} {% for comment in comments %}
+            <div class="dc-item">
+
+              <div class="dc-text">
+                <div class="dc-pic">
+                  <img src="{{comment.author.profile_image | thumbnail_url:'user-preview'}}" alt="" />
+                </div>
+                <h5>{{comment.author}}</h5>
+                <span class="c-date">{{comment.created}}</span>
+                <p>{{comment.body|striptags|safe}}</p>
+                <a href="#" class="reply-btn"><span>Reply</span></a>
+                {% if request.user.is_authenticated %}
+
+                <div class="dt-leave-comment">
+   
+                </div>
+                {% else %}
+                <p>شما باید اول وارد حساب خود شوید</p>
+                {% endif %} {% for reply_comment in comment.rcomment.all %}
+                <div class="dc-item reply-item">
+                  <div class="dc-pic">
+                    <img src="{{comment.user.profile_image | thumbnail_url:'user-preview'}}" alt="" />
+                  </div>
+                  <div class="dc-text">
+                    <h5>{{reply_comment.user}}</h5>
+                    <span class="c-date">{{reply_comment.created}}</span>
+                    <p>{{reply_comment.body}}</p>
+
+
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% empty %}
+            <p>کامنتی برای این پست وجود ندارد.</p>
+            {% endfor %}
+          </div>
+          {% if request.user.is_authenticated %}
+          <div class="dt-leave-comment">
+            <h4>کامنت بگذارید</h4>
+            <form action="{% url 'comments:add-comment' 'article' article.pk %}" method="post">
+              <div class="input-list">
+                {% csrf_token %} 
+                {{form.media}}{{ form.as_p }}
+                
+              </div>
+
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+
+          {% else %}
+          <p>لطفا وارد حساب خود شوید تا بتوانید کامنت بزارید</p>
+          {% endif %}
+        </div>
+      </div>
+        {% recent_posts %}
+    </div>
+  </div>
+</section>
+
+<!-- Details Post Section End -->
+{% endwith %}
+{% endblock content %}
+{% block domready %}
+$('a.like').click(function(e){
+
+e.preventDefault();
+$.post('{% url "blog:like" %}',
+{
+id: $(this).data('id'),
+action: $(this).data('action')
+},
+function(data){
+if (data['status'] == 'ok')
+{
+var previous_action = $('a.like').data('action');
+
+// toggle data-action
+$('a.like').data('action', previous_action == 'like' ?
+'unlike' : 'like');
+// toggle link text
+$('a.like').text(previous_action == 'like' ? 'Unlike' :
+'Like');
+
+// update total likes
+var previous_likes = parseInt($('span.count .total').text());
+$('span.count .total').text(previous_action == 'like' ?
+previous_likes + 1 : previous_likes - 1);
+}
+}
+);
+});
+{% endblock %}
