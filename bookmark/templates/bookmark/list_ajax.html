@@ -1,0 +1,30 @@
+         {% load thumbnail %}
+          {% for image  in images %}
+          <div class="col-lg-6">
+            <div class="cg-item">
+              <div class="cg-pic set-bg" >
+                  <a href="{{ image.get_absolute_url }}">
+      {% thumbnail image.image 300x300 crop="smart" as im %}
+      <a href="{{ image.get_absolute_url }}">
+        <img src="{{ im.url }}">
+      </a>
+    </a>
+                <div class="label"><span>{{image.title}}</span></div>
+              </div>
+              <div class="cg-text">
+                <h5>
+                  <a href="{{image.get_absolute_url}}">{{image.title}}</a
+                  >
+                </h5>
+                <ul>
+                  <li>by <span>{{image.author}}</span></li>
+                  <li><i class="fa fa-clock-o"></i> {{image.create|timesince}}</li>
+                  <li><i class="fa fa-comment-o"></i> {{image.comments.count}}</li>
+                </ul>
+                <p>
+
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}

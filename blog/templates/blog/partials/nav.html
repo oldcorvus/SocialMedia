@@ -16,8 +16,11 @@
       <li><a href="{% url 'blog:index' %}">خانه</a></li>
       <li>
         <a href="#">دسته بندی ها <i class="fa fa-angle-down"></i></a>
+        
       {% include 'blog/partials/category_nav_side_menu.html' %}
       </li>
+      <li><a href="{% url 'bookmark:list' %}">بوکمارک ها </a></li>
+
     </ul>
   </div>
   <div id="mobile-menu-wrap"></div>
@@ -110,6 +113,8 @@
             </ul>
           </li>
           {% endif %}
+          <li><a href="{% url 'bookmark:list' %}">بوکمارک ها </a></li>
+
           <li>
             <a href="#"><span>درباره من <i class="fa fa-angle-down"></i></span></a>
           </li>

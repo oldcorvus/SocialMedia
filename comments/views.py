@@ -8,6 +8,7 @@ from .models import Comment
 from django.urls import reverse
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.contenttypes.models import ContentType
+from bookmark.models import ImageBookmark
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
@@ -18,7 +19,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         if self.kwargs.get('type') == 'article':
             target = get_object_or_404(Article, pk=self.kwargs.get('id'))
         else:
-            pass
+            target = get_object_or_404(ImageBookmark, pk=self.kwargs.get('id'))
 
         form.instance.author = self.request.user
         form.instance.content_object = target

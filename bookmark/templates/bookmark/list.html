@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+{% load jalali_tags %}
+{% load user_actions %}
+{% load main_site %}
+{% load static %}
+<!-- Categories Grid Section Begin -->
+<section class="categories-grid-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 p-0">
+        <div class="row" id="image-list">
+    {% include "bookmark/list_ajax.html" %}
+        </div>
+
+      </div>
+      {% recent_posts %}
+    </div>
+  </div>
+</section>
+<!-- Categories Grid Section End -->
+{% endblock content %}
+{% block domready %}
+  var page = 1;
+  var empty_page = false;
+  var block_request = false;
+
+  $(window).scroll(function() {
+    var margin = $(document).height() - $(window).height() - 200;
+    if  ($(window).scrollTop() > margin && empty_page == false &&
+    block_request == false) {
+     block_request = true;
+      page += 1;
+      $.get('?page=' + page, function(data) {
+       if(data == '') {
+          empty_page = true;
+        }
+        else {
+          block_request = false;
+          $('#image-list').append(data);
+        }
+      });
+    }
+  });
+{% endblock %}

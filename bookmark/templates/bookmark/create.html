@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <div class="row">
+{% include "messages.html" %}
+    
+        <div class="container  bg-dark text-white" >
+            <div class="signup-title">
+                <h2>{{title}} بوکمارک</h2>
+                <p>لطفا فرم زیر را تکمیل فرمایید</p>
+            </div>
+            <form action="#" class="signup-form"  enctype="multipart/form-data" method="POST">
+                <div class="sf-input-list">
+                  <img src="{{ request.GET.url }}" class="image-preview">
+                    {% csrf_token %}
+                    {{form.media}}
+                   {{form.as_p}}
+                </div>
+
+                <button type="submit" class="btn btn-danger"><span>ثبت</span></button>
+            </form>
+            </div>
+        </div>
+
+{% endblock content %}

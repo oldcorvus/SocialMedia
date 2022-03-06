@@ -1,16 +1,18 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.generic import ListView, DeleteView, DetailView
-from django.views import View
 from blog.mixins import AuthorMixin, AjaxRequiredMixin
-from .models import *
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+from .models import Article , Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from relations.utils import create_action
 from django.contrib import messages
 from django.utils.text import slugify
-from django.contrib.auth.mixins import LoginRequiredMixin
 from comments.forms import CommentFrom
+from bookmark.models import ImageBookmark
+
 
 class IndexPage(ListView):
     paginate_by = 4
@@ -27,6 +29,8 @@ class IndexPage(ListView):
         context['category_data'] = all_categories
         context['slidebar'] = Article.objects.filter(
             status='P', promote=True)[:3]
+        context['recent_bookmarks'] = ImageBookmark.objects.all()[:6]
+
         return context
 
 
@@ -59,6 +63,7 @@ class ArticleDetailView(DetailView):
         context['form'] = CommentFrom()
 
         return context
+
     def get_object(self):
         article = get_object_or_404(Article, slug=self.kwargs.get('slug'),
                                     status='P', publish__year=self.kwargs.get('year'), publish__month=self.kwargs.get('month'), publish__day=self.kwargs.get('day'))
@@ -161,6 +166,7 @@ class ArticleUpdateView(LoginRequiredMixin, AuthorMixin, UpdateView):
 
 
 class ArticleLikeView(LoginRequiredMixin, AjaxRequiredMixin, View):
+
     def post(self, request):
         article_id = request.POST.get('id')
         action = request.POST.get('action')

@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import redirect
 from django.contrib.auth.mixins import AccessMixin
 from django.http import HttpResponseBadRequest
 

@@ -34,10 +34,10 @@
           <h5>Recent Bookmarks</h5>
         </div>
         <div class="insta-pic">
-          <img src="img/instagram/ip-1.jpg" alt="" />
-          <img src="img/instagram/ip-2.jpg" alt="" />
-          <img src="img/instagram/ip-3.jpg" alt="" />
-          <img src="img/instagram/ip-4.jpg" alt="" />
+            {% for bookmark in recent_bookmarks %}
+          <img src="{{bookmark.image |thumbnail_url:'preview'}}" alt="" />
+          {% endfor %}
+
         </div>
       </div>
 

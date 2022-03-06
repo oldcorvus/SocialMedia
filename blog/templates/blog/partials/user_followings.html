@@ -1,5 +1,7 @@
 {% load main_site %}
 {% load thumbnail %}
+{% load user_actions %}
+
 <!-- Update News Section Begin -->
 <section class="update-news-section">
   <div class="container">
@@ -179,9 +181,9 @@
                           <div class="un-big-item set-bg" data-setbg="{{user_bookmarks.0.target.image.url}}"
                             style="background-image: url('img/news/news-1.jpg')">
                             <div class="ub-text">
-                              <div class="label"><span>Reviews</span></div>
+                              <div class="label"><span>{{user_bookmarks.0.target.author}}</span></div>
                               <h5>
-                                <a href="#">{{user_bookmarks.0.target.title|safe}}</a>
+                                <a href="{{user_bookmarks.0.target.get_absolute_url}}">{{user_bookmarks.0.target.title|safe}}</a>
                               </h5>
                               <ul>
                                 <li>by <span>{{user_bookmarks.0.target.user}}</span></li>
@@ -201,11 +203,11 @@
                                 <div class="un_pic set-bg" data-setbg="{{user_bookmarks.1.target.image.url}}" style="
                                   background-image: url('img/news/news-3.jpg');
                                 ">
-                                  <div class="label"><span>Reviews</span></div>
+                                  <div class="label"><span>{{user_bookmarks.1.target.author}}</span></div>
                                 </div>
                                 <div class="un_text">
                                   <h6>
-                                    <a href="#">{{user_bookmarks.1.target.title|safe}}</a>
+                                    <a href="{{user_bookmarks.1.target.get_absolute_url}}">{{user_bookmarks.1.target.title|safe}}</a>
                                   </h6>
                                   <ul>
                                     <li>
@@ -223,11 +225,11 @@
                                 <div class="un_pic set-bg" data-setbg="{{user_bookmarks.2.target.image.url}}" style="
                                   background-image: url('img/news/news-3.jpg');
                                 ">
-                                  <div class="label"><span>Reviews</span></div>
+                                  <div class="label"><span>{{user_bookmarks.2.target.author}}</span></div>
                                 </div>
                                 <div class="un_text">
                                   <h6>
-                                    <a href="#">{{user_bookmarks.2.target.title|safe}}</a>
+                                    <a href="{{user_bookmarks.2.target.get_absolute_url}}">{{user_bookmarks.2.target.title|safe}}</a>
                                   </h6>
                                   <ul>
                                     <li>
@@ -245,11 +247,11 @@
                                 <div class="un_pic set-bg" data-setbg="{{user_bookmarks.3.target.image.url}}" style="
                                   background-image: url('img/news/news-3.jpg');
                                 ">
-                                  <div class="label"><span>Reviews</span></div>
+                                  <div class="label"><span>{{user_bookmarks.3.target.author}}</span></div>
                                 </div>
                                 <div class="un_text">
                                   <h6>
-                                    <a href="#">{{user_bookmarks.3.target.title|safe}}</a>
+                                    <a href="{{user_bookmarks.3.target.get_absolute_url}}">{{user_bookmarks.3.target.title|safe}}</a>
                                   </h6>
                                   <ul>
                                     <li>
