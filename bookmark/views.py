@@ -26,6 +26,7 @@ class BookmarkCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        print(form)
         response = super(BookmarkCreateView, self).form_valid(form)
         create_action(self.request.user, 'bookmarked', self.object)
         messages.success(self.request, 'تصویر شما با موفقیت منتشر شد')
@@ -102,7 +103,7 @@ class BookmarkLikeView(LoginRequiredMixin, AjaxRequiredMixin, View):
 
 
 class BookmarkListView(ListView):
-    paginate_by = 1
+    paginate_by = 5
     model = ImageBookmark
     template_name = 'bookmark/list.html'
     context_object_name = 'images'
@@ -111,5 +112,4 @@ class BookmarkListView(ListView):
         template_name = 'bookmark/list.html'
         if self.request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             template_name = 'bookmark/list_ajax.html'
-        print(template_name)
         return template_name

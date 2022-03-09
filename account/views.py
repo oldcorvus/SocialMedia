@@ -86,7 +86,7 @@ class UserLoginView(View):
                 login(request, user)
                 messages.success(request, 'با موفقیت وارد سایت شدید', 'info')
                 return redirect('/')
-            messages.error(request, 'phone or password is wrong', 'warning')
+            messages.error(request, 'ایمیل یا رمز عبور نادرست است', 'warning')
         return render(request, self.template_name, {'form': form})
 
 

@@ -1,16 +1,16 @@
 {% for cat in category %}
 {% if cat.parent == None %}
-     <ul class="mw-nav">
-          <li><a href="{{ cat.get_absolute_url }}" >{{cat.title}}</a> 
+<ul class="mw-nav">
+    <li><a href="{{ cat.get_absolute_url }}">{{cat.title}}</a>
 
-          </li>
+    </li>
 
-      </ul>
-    
-    
+</ul>
+
+
 <div class="mw-post">
-     {% for child in cat.children.active %}
-    <div class="mw-post-item" >
+    {% for child in cat.children.active %}
+    <div class="mw-post-item">
         <div class="mw-pic">
             <img src="{{child.cover.url}}" alt="">
         </div>
@@ -24,7 +24,7 @@
     </div>
     {% endfor %}
 
-    </div>
+</div>
 
-    {% endif %}
-    {% endfor %}
+{% endif %}
+{% endfor %}

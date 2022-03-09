@@ -4,7 +4,7 @@ from django.views.generic import ListView, DeleteView, DetailView
 from blog.mixins import AuthorMixin, AjaxRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from .models import Article , Category
+from .models import Article, Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from relations.utils import create_action
@@ -163,6 +163,7 @@ class ArticleUpdateView(LoginRequiredMixin, AuthorMixin, UpdateView):
         messages.success(self.request, "مقاله شما با موفقيت ويرايش يافت")
 
         return super(ArticleUpdateView, self).form_valid(form)
+
 
 
 class ArticleLikeView(LoginRequiredMixin, AjaxRequiredMixin, View):

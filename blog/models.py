@@ -11,6 +11,7 @@ from jalali_date import datetime2jalali
 from comments.models import Comment
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
 
 User = get_user_model()
 
@@ -95,6 +96,11 @@ class Category(models.Model):
     parent = models.ForeignKey('self', default=None, blank=True, null=True, related_name="children",
                                on_delete=models.SET_NULL, verbose_name="زیر دسته")
     objects = CategoryManagers()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('blog:category', args=[self.slug])

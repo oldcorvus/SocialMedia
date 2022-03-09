@@ -28,7 +28,7 @@ class CustomUser(AbstractUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    following = models.ManyToManyField('self', through=Contact,
+    following = models.ManyToManyField('self',
                                        related_name='followers',
                                        symmetrical=False)
     objects = UserManager()

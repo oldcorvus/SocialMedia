@@ -12,9 +12,11 @@
             <div class="col-lg-12">
                 <div class="dg-slider owl-carousel">
                     <div class="dg-item set-bg"> 
+                        {% if bookmark.image %}
                         <a href="{{ bookmark.image.url }}">
                             <img src="{{ bookmark.image | thumbnail_url:'bookmark'}}" class="bookmark-detail">
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -15,5 +15,5 @@ urlpatterns = [
          ArticleUpdateView.as_view(), name='article-edit'),
     path('articles/delete/<int:pk>/',
          ArticleDeleteView.as_view(), name='article-delete'),
-    path('like/', ArticleLikeView.as_view(), name='like'),
+    path('article/like/', ArticleLikeView.as_view(), name='like'),
 ]

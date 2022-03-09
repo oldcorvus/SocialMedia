@@ -15,11 +15,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'SECRET_KEY Not found')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+LOGIN_URL = 'account:user_login'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,14 +29,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor_uploader',
     'jalali_date',
-    'ckeditor',
-    'relations.apps.RelationsConfig',
-    'comments.apps.CommentsConfig',
-    'account.apps.AccountConfig',
-    'bookmark.apps.BookmarkConfig',
-    'blog.apps.BlogConfig',
     'easy_thumbnails',
     'django_extensions',
+    'ckeditor',
+    'relations.apps.RelationsConfig',
+    'account.apps.AccountConfig',
+
+    'comments.apps.CommentsConfig',
+    'bookmark.apps.BookmarkConfig',
+    'blog.apps.BlogConfig',
 
 ]
 JALALI_DATE_DEFAULTS = {

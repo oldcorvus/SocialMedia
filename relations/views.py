@@ -30,3 +30,4 @@ class FollowView(LoginRequiredMixin, AjaxRequiredMixin, View):
             except User.DoesNotExist:
                 return JsonResponse({'status': 'error'})
         return JsonResponse({'status': 'error'})
+

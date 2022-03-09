@@ -20,7 +20,7 @@ def get_random_str(min_length: int, max_length: int) -> str:
 
 def send_otp_code(phone_number, code):
     try:
-        api = KavenegarAPI('kooft')
+        api = KavenegarAPI('')
         params = {
             'sender': '',
             'receptor': phone_number,
