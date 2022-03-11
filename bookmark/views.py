@@ -67,6 +67,7 @@ class BookmarkDetailView(DetailView):
 
     def get_object(self):
         bookmark = get_object_or_404(ImageBookmark, slug=self.kwargs.get('slug'),
+                                     pk = self.kwargs.get('id')
                                      created__year=self.kwargs.get('year'), created__month=self.kwargs.get('month'), created__day=self.kwargs.get('day'))
         return bookmark
 

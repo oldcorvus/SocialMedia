@@ -113,7 +113,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CustomUser
     template_name = "account/edit-profile.html"
     form_class = UserChangeForm
-    success_url = reverse_lazy('account:user_login')
+    success_url = reverse_lazy('blog:index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

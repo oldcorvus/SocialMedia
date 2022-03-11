@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
                                   verbose_name="نام", blank=True)
     last_name = models.CharField(max_length=30,
                                  verbose_name="نام خانوادگی", blank=True)
-    phone_number = models.CharField(max_length=11, unique=True)
+    phone_number = models.CharField(max_length=11, unique=True,verbose_name="شماره تماس")
     email = models.EmailField(unique=True, verbose_name="ایمیل شما")
     date_joined = jmodels.jDateTimeField("تاریخ عضویت", default=timezone.now)
     profile_image = models.ImageField(upload_to=upload_location, verbose_name="عکس پروفایل",

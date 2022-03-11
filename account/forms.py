@@ -6,16 +6,16 @@ from .models import CustomUser, OtpCode
 
 
 class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(label='password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='رمزعبور', widget=forms.PasswordInput)
     password2 = forms.CharField(
-        label='confirm password', widget=forms.PasswordInput)
+        label='تایید رمز عبور', widget=forms.PasswordInput)
 
     class Meta:
         model = CustomUser
         fields = ('email', 'phone_number', 'username')
 
-    def clean_phone(self):
-        phone = self.cleaned_data['phone']
+    def clean_phone_number(self):
+        phone = self.cleaned_data['phone_number']
         user = CustomUser.objects.filter(phone_number=phone).exists()
         if user:
             raise ValidationError('شماره تماس از قبل موجود است')
@@ -35,13 +35,14 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-    def clean_password2(self):
+    def clean_email(self):
         if 'email' in self.cleaned_data:
             email = self.cleaned_data['email']
             user = CustomUser.objects.filter(email=email)
             if user.exists():
                 raise forms.ValidationError(
                     "با ایمیل وارد شده قبلا ثبت نام صورت گرفته شده لطفا ایمیل دیگری را انتخاب کنید")
+            return email
 
 
 class UserChangeForm(forms.ModelForm):
