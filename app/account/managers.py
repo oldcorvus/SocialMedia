@@ -22,9 +22,10 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=email,
             phone_number=phone_number,
-            is_admin=is_staff,
+            is_admin= True,
             is_active=True,
             is_superuser=is_superuser,
+            is_staff = True,
 
             **extra_fields
         )

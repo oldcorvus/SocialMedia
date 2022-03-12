@@ -4,7 +4,6 @@ from django.utils import timezone
 from django_jalali.db import models as jmodels
 from .managers import UserManager
 from .utils import get_random_str
-from relations.models import Contact
 
 
 def upload_location(instance, filename):
@@ -27,6 +26,8 @@ class CustomUser(AbstractUser):
                                 verbose_name="درباره من", null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+
 
     following = models.ManyToManyField('self',
                                        related_name='followers',
@@ -45,9 +46,6 @@ class CustomUser(AbstractUser):
     def has_module_perms(self, app_label):
         return True
 
-    @property
-    def is_staff(self):
-        return self.is_admin
 
     class Meta:
         verbose_name = 'پروفايل كاربر'

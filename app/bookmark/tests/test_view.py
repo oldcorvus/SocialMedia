@@ -106,7 +106,7 @@ class bookmarkiewTest(TestCase):
             reverse('bookmark:detail', kwargs={'year' : today.year,
                 'month' : today.month,
                 'day' : today.day,
-                'slug' :  'test1',
+                'slug' :  'test0',
                 'id': 1}))
         self.assertEqual(response.status_code, 200)
 
