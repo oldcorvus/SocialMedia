@@ -17,4 +17,4 @@ class BookmarkModelTest(TestCase):
     
     def test_get_absolute_url(self):
         bookmark = ImageBookmark.objects.get(id=1)
-        self.assertEqual(bookmark.get_absolute_url(), f'/bookmark/{datetime.date.today().year}/{datetime.date.today().month}/{datetime.date.today().day}/test/1/')
+        self.assertEqual(bookmark.get_absolute_url(), f'/bookmark/detail/{datetime.date.today().year}/{datetime.date.today().month}/{datetime.date.today().day}/test/1/')

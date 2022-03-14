@@ -1,13 +1,15 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class Contact(models.Model):
-    user_from = models.ForeignKey('account.CustomUser',
+    user_from = models.ForeignKey(User,
                                   related_name='rel_from_set',
                                   on_delete=models.CASCADE)
-    user_to = models.ForeignKey('account.CustomUser',
+    user_to = models.ForeignKey(User,
                                 related_name='rel_to_set',
                                 on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True,
@@ -21,7 +23,7 @@ class Contact(models.Model):
 
 
 class Action(models.Model):
-    user = models.ForeignKey('account.CustomUser',
+    user = models.ForeignKey(User,
                              related_name='actions',
                              db_index=True,
                              on_delete=models.CASCADE, default="")

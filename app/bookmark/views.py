@@ -26,7 +26,6 @@ class BookmarkCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        print(form)
         response = super(BookmarkCreateView, self).form_valid(form)
         create_action(self.request.user, 'bookmarked', self.object)
         messages.success(self.request, 'تصویر شما با موفقیت منتشر شد')

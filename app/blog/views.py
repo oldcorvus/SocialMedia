@@ -141,29 +141,6 @@ class UserArticlesListView(LoginRequiredMixin, ListView):
         return Article.objects.filter(author__username=username)
 
 
-class ArticleUpdateView(LoginRequiredMixin, AuthorMixin, UpdateView):
-    model = Article
-    template_name = "blog/create-article.html"
-    fields = ['title', 'content', 'cover', 'category', 'status']
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "ويرايش "
-        return context
-
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        form.fields['content'].widget = CKEditorUploadingWidget()
-        return form
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.slug = slugify(
-            form.cleaned_data['title'][:30], allow_unicode=True)
-        messages.success(self.request, "مقاله شما با موفقيت ويرايش يافت")
-
-        return super(ArticleUpdateView, self).form_valid(form)
-
 
 
 class ArticleLikeView(LoginRequiredMixin, AjaxRequiredMixin, View):

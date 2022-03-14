@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-AUTH_USER_MODEL = "account.CustomUser"
+AUTH_USER_MODEL = "useraccounts.CustomUser"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # 3rd-party apps
     'ckeditor_uploader',
@@ -33,7 +34,11 @@ INSTALLED_APPS = [
     'ckeditor',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
+    'dj_rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
 
     # local apps
     'relations.apps.RelationsConfig',
@@ -42,8 +47,15 @@ INSTALLED_APPS = [
     'bookmark.apps.BookmarkConfig',
     'blog.apps.BlogConfig',
     'core.apps.CoreConfig',
+    'api.apps.ApiConfig',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+                'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    )
+
+}
 # config for django jalali
 JALALI_DATE_DEFAULTS = {
     'Strftime': {
@@ -68,7 +80,20 @@ JALALI_DATE_DEFAULTS = {
         }
     },
 }
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'moel-auth'
+JWT_AUTH_REFRESH_COOKIE = 'moel-token'
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER':'account.serializers.UserRegisterSeralizer',
+    }
+
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'account.serializers.LoginSerializer',
+
+}
 # config for easy thumbnail
 THUMBNAIL_ALIASES = {
     '': {
@@ -129,7 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+SITE_ID = 1
 
 # Internationalization
 

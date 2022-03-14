@@ -5,7 +5,7 @@ app_name = 'bookmark'
 
 urlpatterns = [
     path('bookmark/create/', BookmarkCreateView.as_view(), name='create'),
-    path('bookmark/<int:year>/<int:month>/<int:day>/<slug:slug>/<int:id>/',
+    path('bookmark/detail/<int:year>/<int:month>/<int:day>/<slug:slug>/<int:id>/',
          BookmarkDetailView.as_view(), name='detail'),
     path('bookmark/edit/<int:pk>/',
          BookmarkUpdateView.as_view(), name='bookmark-edit'),
