@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework import routers
-from api.views import user_views, blog_views, bookmark_views, comment_views
+from api.views import user_views, relations_views, blog_views, bookmark_views, comment_views
 
 
 app_name = 'api'
@@ -34,6 +34,11 @@ urlpatterns = [
          name='add-comment'),
     path('comment/create/<str:type>/<int:id>/<int:reply>/', comment_views.AddCommentView.as_view(),
          name='add-reply'),
-
+    path('relations/following-actions/', relations_views.UserActionsListView.as_view(),
+         name='following-actions'),
+    path('relations/follow/', relations_views.FollowView.as_view(),
+         name='follow'),
+    path('relations/unfollow/', relations_views.UnFollowView.as_view(),
+         name='unfollow'),
 ]
 urlpatterns += router.urls

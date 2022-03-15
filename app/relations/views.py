@@ -19,13 +19,11 @@ class FollowView(LoginRequiredMixin, AjaxRequiredMixin, View):
 
                 user = User.objects.get(id=user_id)
                 if action == 'follow':
-                    Contact.objects.get_or_create(user_from=request.user,
-                                                  user_to=user)
+                    request.user.following.add(user)
                     create_action(request.user, 'is following', user)
                 else:
+                    self.request.user.following.remove(user)
 
-                    Contact.objects.filter(user_from=request.user,
-                                           user_to=user).delete()
                 return JsonResponse({'status': 'ok'})
             except User.DoesNotExist:
                 return JsonResponse({'status': 'error'})

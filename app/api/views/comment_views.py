@@ -74,9 +74,6 @@ class AddCommentView(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-
-    def perform_create(self, serializer):
         if self.kwargs.get('type') == 'article':
             target = get_object_or_404(Article, pk=self.kwargs.get('id'))
         else:

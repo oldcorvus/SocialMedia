@@ -29,7 +29,8 @@ class UserFollowersListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return get_object_or_404(User, pk=user.id).following.followers.all()
+        print(user, get_object_or_404(User, pk=user.id).followers.all())
+        return get_object_or_404(User, pk=user.id).followers.all()
 
 
 class UserFollowingsListView(generics.ListAPIView):
@@ -40,4 +41,5 @@ class UserFollowingsListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return get_object_or_404(User, pk=user.id).following
+        print(get_object_or_404(User, pk=user.id).following.all())
+        return get_object_or_404(User, pk=user.id).following.all()

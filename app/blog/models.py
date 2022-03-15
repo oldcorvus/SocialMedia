@@ -61,7 +61,7 @@ class Article(models.Model):
     objects = ArticleManagers()
     comments = GenericRelation(Comment)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                        related_name='article_liked',null=True,
+                                        related_name='article_liked',
                                         blank=True)
 
     def get_absolute_url(self):

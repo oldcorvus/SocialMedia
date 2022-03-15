@@ -11,7 +11,7 @@ def upload_location(instance, filename):
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=50, unique=True, db_index=True,
+    username = models.CharField(max_length=60, unique=True, db_index=True,
                                 verbose_name="نام کاربری")
     first_name = models.CharField(max_length=20,
                                   verbose_name="نام", blank=True)
@@ -23,15 +23,15 @@ class CustomUser(AbstractUser):
     profile_image = models.ImageField(upload_to=upload_location, verbose_name="عکس پروفایل",
                                       null=True, blank=True)
     about_me = models.TextField(max_length=150,
-                                verbose_name="درباره من",  blank=True)
+                                verbose_name="درباره من", null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
 
     following = models.ManyToManyField('self',
-                                       related_name='followers',
-                                       symmetrical=False)
+                                       related_name='followers'
+                                       ,symmetrical=False)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
