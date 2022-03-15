@@ -80,12 +80,12 @@ class NestedCategoryListView(generics.ListAPIView):
 
 
 class ArticleUserLikedListView(generics.ListAPIView):
-    """List of all active article category"""
+    """List of all users liked article """
     serializer_class = UserSerializer
     pagination_class = ArticleLimitOffsetPagination
 
     def get_queryset(self):
-        article = self.kwargs.get('id')
+        article = self.kwargs.get('pk')
         return get_object_or_404(Article, pk=article).users_like.all()
 
 

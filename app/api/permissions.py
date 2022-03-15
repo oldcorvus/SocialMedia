@@ -21,6 +21,7 @@ class IsOwner(permissions.BasePermission):
             return True
         return obj == request.user
 
+
 class IsAdmin(permissions.BasePermission):
     """
     Custom permission to check if the user is admin. 

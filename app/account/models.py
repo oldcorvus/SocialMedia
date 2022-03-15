@@ -23,7 +23,7 @@ class CustomUser(AbstractUser):
     profile_image = models.ImageField(upload_to=upload_location, verbose_name="عکس پروفایل",
                                       null=True, blank=True)
     about_me = models.TextField(max_length=150,
-                                verbose_name="درباره من", null=True, blank=True)
+                                verbose_name="درباره من",  blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
