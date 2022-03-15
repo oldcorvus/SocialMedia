@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework import routers
-from api.views import user_views, blog_views, bookmark_views
+from api.views import user_views, blog_views, bookmark_views, comment_views
 
 
 app_name = 'api'
@@ -10,7 +10,8 @@ router.register(r'articles', blog_views.ArticleViewSet, basename='articles')
 router.register(r'category', blog_views.CategoryViewSet, basename='category')
 router.register(r'bookmark', bookmark_views.BookmarkViewSet,
                 basename='bookmark')
-
+router.register(r'comment', comment_views.CommentViewSet,
+                basename='comment')
 
 urlpatterns = [
     path('followers/', user_views.UserFollowersListView.as_view(), name='followers'),
@@ -27,6 +28,12 @@ urlpatterns = [
          bookmark_views.BookmarkLikeView.as_view(), name='like-bookmark'),
     path('bookmark/user-liked/<int:pk>/', bookmark_views.BookmarkUserLikedListView.as_view(),
          name='user-liked-bookmark'),
+    path('comment/replys/<int:pk>/', comment_views.ReplyOfCommentListView.as_view(),
+         name='reply-of-comment'),
+    path('comment/create/<str:type>/<int:id>/', comment_views.AddCommentView.as_view(),
+         name='add-comment'),
+    path('comment/create/<str:type>/<int:id>/<int:reply>/', comment_views.AddCommentView.as_view(),
+         name='add-reply'),
 
 ]
 urlpatterns += router.urls

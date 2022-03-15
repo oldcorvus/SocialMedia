@@ -9,6 +9,7 @@ class BookmarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageBookmark
         exclude = ('users_like',)
+        read_only_fields = ('author',)
 
     def create(self, validated_data):
         """Create a new Bookmark and return it"""

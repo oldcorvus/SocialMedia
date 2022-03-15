@@ -30,6 +30,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         exclude = ('created', 'updated','author','users_like')
+        read_only_fields = ('author',)
 
     def create(self, validated_data):
         """Create a new article  and return it"""

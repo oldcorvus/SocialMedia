@@ -10,3 +10,7 @@ class ArticleLimitOffsetPagination(LimitOffsetPagination):
 class BookmarkLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 20
     max_limit = 30
+
+class CommentLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 50
+    max_limit = 60
