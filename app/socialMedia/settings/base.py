@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'django_filters',
+
 
     # local apps
     'relations.apps.RelationsConfig',
@@ -50,12 +52,8 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-                'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
 
-}
+
 # config for django jalali
 JALALI_DATE_DEFAULTS = {
     'Strftime': {
@@ -82,7 +80,7 @@ JALALI_DATE_DEFAULTS = {
 }
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+#config for django rest api
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'moel-auth'
 JWT_AUTH_REFRESH_COOKIE = 'moel-token'
@@ -92,8 +90,25 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'account.serializers.LoginSerializer',
-
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+                'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+        ],
+    'DEFAULT_SEARCH_BACKENDS': [
+        'django_filters.rest_framework.DjangoSearchBackend'
+        ],
+    'DEFAULT_ORDERING_BACKENDS': [
+        'django_filters.rest_framework.DjangoOrderingBackend'
+        ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100
+}
+
 # config for easy thumbnail
 THUMBNAIL_ALIASES = {
     '': {

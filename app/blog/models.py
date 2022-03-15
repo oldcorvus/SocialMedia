@@ -1,4 +1,6 @@
+from enum import unique
 import os
+from re import T
 from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
@@ -59,7 +61,7 @@ class Article(models.Model):
     objects = ArticleManagers()
     comments = GenericRelation(Comment)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                        related_name='article_liked',
+                                        related_name='article_liked',null=True,
                                         blank=True)
 
     def get_absolute_url(self):
@@ -70,6 +72,11 @@ class Article(models.Model):
 
     def active_categories(self):
         return self.category.filter(status=True)
+        
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title, unique=True)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'مقاله'

@@ -3,10 +3,8 @@ from django.shortcuts import get_object_or_404
 from account.serializers import UserSerializer
 from api.permissions import IsOwner
 from rest_framework import generics, permissions, status
-from django.http import JsonResponse
 from rest_framework import viewsets
 from django.contrib.auth import get_user_model
-from rest_framework.response import Response
 User = get_user_model()
 
 
@@ -38,6 +36,7 @@ class UserFollowingsListView(generics.ListAPIView):
     """List of all user followers"""
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    
 
     def get_queryset(self):
         user = self.request.user

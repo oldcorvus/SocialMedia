@@ -20,3 +20,13 @@ class IsOwner(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return obj == request.user
+
+class IsAdmin(permissions.BasePermission):
+    """
+    Custom permission to check if the user is admin. 
+    """
+    message = "You dont have permission .only admins can create new category"
+
+    def has_permission(self, request, view):
+
+        return request.user.is_admin
