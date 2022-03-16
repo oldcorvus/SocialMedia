@@ -63,5 +63,6 @@ To run the tests, `cd` into the directory where `manage.py` is:
 ## Features
  rest api using drf,
  jwt authentications, 
+ activity stream,
  ajax scrolling , and ...
  
