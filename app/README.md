@@ -31,6 +31,19 @@ Once `pip` has finished downloading the dependencies:
 And navigate to `http://127.0.0.1:8000/`.
 
 
+## Running Locally with Docker
+
+1.build the image:
+
+```sh
+  $ docker-compose build .
+```
+2.Spin up the containers
+```sh
+  $ docker-compose up
+```
+then view the site at  http://localhost:8000/
+
 ## Walkthrough
 
 Before you interact with the application, go to settings and set up
