@@ -1,10 +1,11 @@
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django_jalali.db import models as jmodels
 from .managers import UserManager
 from .utils import get_random_str
-
+from django.urls import reverse
 
 def upload_location(instance, filename):
     return f"user_profiles/{instance.username.lower()}/{get_random_str(10, 50)}.jpg"
@@ -61,7 +62,7 @@ class CustomUser(AbstractUser):
         return self.username
 
     def get_absolute_url(self):
-        return "/users/%i/" % (self.pk)
+        return reverse('account:user_profile', args=(self.username,))
 
 
 class OtpCode(models.Model):

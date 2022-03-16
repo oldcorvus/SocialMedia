@@ -25,8 +25,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'account.apps.AccountConfig',
 
     # 3rd-party apps
+
+    'drf_yasg',
     'ckeditor_uploader',
     'jalali_date',
     'easy_thumbnails',
@@ -44,7 +47,6 @@ INSTALLED_APPS = [
 
     # local apps
     'relations.apps.RelationsConfig',
-    'account.apps.AccountConfig',
     'comments.apps.CommentsConfig',
     'bookmark.apps.BookmarkConfig',
     'blog.apps.BlogConfig',
@@ -106,7 +108,8 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoOrderingBackend'
         ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 100,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 # config for easy thumbnail

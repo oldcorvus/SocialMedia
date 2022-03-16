@@ -9,7 +9,7 @@ urlpatterns = [
     path('verify/', views.UserRegisterVerifyCodeView.as_view(), name='verify_code'),
     path('login/', views.UserLoginView.as_view(), name='user_login'),
     path('logout/', views.UserLogoutView.as_view(), name='user_logout'),
-    path('profile/<slug:user>/', views.UserDetailView.as_view(), name="user_profile"),
+    path('profile/<str:user>/', views.UserDetailView.as_view(), name="user_profile"),
     path('profile/edit/<int:pk>/',
          views.UserUpdateView.as_view(), name="profile_edit"),
 

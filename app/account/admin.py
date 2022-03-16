@@ -8,4 +8,4 @@ class UserAdmin(BaseUserAdmin):
     list_display = ['email', 'username']
 
 
-admin.site.register(CustomUser)
+admin.site.register(CustomUser,UserAdmin)

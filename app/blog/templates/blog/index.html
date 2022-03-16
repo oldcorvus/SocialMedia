@@ -95,7 +95,8 @@
                         </div>
                         <div class="insta-pic">
                             {% for bookmark in recent_bookmarks %}
-                            <img src="{{bookmark.image |thumbnail_url:'preview'}}" alt="" />
+                           <a href="{{bookmark.get_absoulte_url}}">
+                          <img src="{{bookmark.image |thumbnail_url:'preview'}}" alt="" /></a>
                             {% endfor %}                        </div>
                     </div>
 
