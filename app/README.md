@@ -61,7 +61,7 @@ To run the tests, `cd` into the directory where `manage.py` is:
   navigate to `http://127.0.0.1:8000/swagger/`
   
 ## Features
- rest api using drf
- jwt authentications
- ajax scrolling
+ rest api using drf,
+ jwt authentications, 
+ ajax scrolling , and ...
  
