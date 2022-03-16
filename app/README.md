@@ -30,20 +30,19 @@ Once `pip` has finished downloading the dependencies:
 ```
 And navigate to `http://127.0.0.1:8000/`.
 
+
 ## Running Locally with Docker
 
+1.build the image:
 
-1. Build the images::
-
-    docker-compose build
-
-2. Spin up the containers::
-
-    docker-compose up
-
-3. View the site at http://localhost:8000/
-
-
+```sh
+  $ docker-compose build .
+```
+2.Spin up the containers
+```sh
+  $ docker-compose up
+```
+then view the site at  http://localhost:8000/
 
 ## Walkthrough
 
@@ -56,7 +55,6 @@ secret key.
 To run the tests, `cd` into the directory where `manage.py` is:
 ```sh
 (env)$ python manage.py test --settings=socialMedia.settings.test
-
 
 ```
 ## API Docs 
